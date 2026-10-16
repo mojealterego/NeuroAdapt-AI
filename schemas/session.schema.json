@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Synthetic rehabilitation session",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "session_id",
+    "started_at",
+    "input_mode",
+    "synthetic"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "session_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "input_mode": {
+      "enum": [
+        "emg",
+        "hand_tracking",
+        "gaze",
+        "controller"
+      ]
+    },
+    "synthetic": {
+      "const": true
+    },
+    "samples": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "time_ms",
+          "signal_quality"
+        ],
+        "properties": {
+          "time_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "signal_quality": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    }
+  }
+}
